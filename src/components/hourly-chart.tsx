@@ -21,7 +21,7 @@ export function HourlyChart({ inputs }: { inputs: Inputs }) {
         <polygon points={`40,158 ${points} 569,158`} className="chart-area" /><polyline points={points} className="chart-line" />
         {selected && <><line x1={x(inputs.hour)} x2={x(inputs.hour)} y1="22" y2="158" className="chart-selected" /><circle cx={x(inputs.hour)} cy={y(selected.index)} r="5" className="chart-dot" /></>}
         {[0, 4, 8, 12, 16, 20, 23].map(hour => <text x={x(hour)} y="181" textAnchor="middle" className="chart-axis" key={hour}>{hour === 0 ? '12 AM' : hour === 12 ? '12 PM' : `${hour % 12} ${hour < 12 ? 'AM' : 'PM'}`}</text>)}
-        {hours.map(({ hour, index }) => <rect key={hour} x={x(hour) - 11} y="18" width="23" height="144" className="chart-hit" onMouseEnter={() => setHovered(hour)} onTouchStart={() => setHovered(hour)}><title>{formatHour(hour)}: {index}/100 · {estimate({ ...inputs, hour }).level}</title></rect>)}
+        {hours.map(({ hour, index }) => <rect key={hour} x={x(hour) - 11} y="18" width="23" height="144" className="chart-hit" onMouseEnter={() => setHovered(hour)} onTouchStart={() => setHovered(hour)}><title>{`${formatHour(hour)}: ${index}/100 · ${estimate({ ...inputs, hour }).level}`}</title></rect>)}
         {active && <g pointerEvents="none"><rect x={Math.min(470, Math.max(40, x(active.hour) - 52))} y="0" width="105" height="23" rx="4" className="chart-tooltip" /><text x={Math.min(470, Math.max(40, x(active.hour) - 52)) + 52.5} y="15" textAnchor="middle" className="chart-tooltip-text">{formatHour(active.hour)} · {active.index}</text></g>}
       </svg>
     </div>
